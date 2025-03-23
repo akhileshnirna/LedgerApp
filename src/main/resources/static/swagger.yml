@@ -1,14 +1,14 @@
 openapi: 3.0.4
 info:
-  title: Swagger Petstore - OpenAPI 3.0
+  title: Swagger LedgerApp - OpenAPI 3.0
   description: |-
     This is a simple documentation of a double-entry ledger API.
   version: 1.0.12
 servers:
   - url: http://localhost:8080/api/v1/ledger
 tags:
-  - name: Ledger
-    description: Interact with transactions
+  - name: LedgerApp
+    description: Record/view transactions and get account balances.
 
 paths:
   /transaction:

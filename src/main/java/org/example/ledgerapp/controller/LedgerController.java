@@ -4,11 +4,14 @@ import ch.qos.logback.core.util.StringUtil;
 import org.example.ledgerapp.domain.Entry;
 import org.example.ledgerapp.dto.TransactionDTO;
 import org.example.ledgerapp.enums.AccountType;
+import org.example.ledgerapp.exception.InvalidAccountTypeException;
 import org.example.ledgerapp.service.TransactionService;
 import org.example.ledgerapp.util.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,15 +43,21 @@ public class LedgerController {
 
     @GetMapping("/balance/{accountType}")
     public ResponseEntity<BigDecimal> getBalance(@PathVariable String accountType) {
-        AccountType type = AccountType.valueOf(accountType);
-        return ResponseEntity.ok(transactionService.getBalance(type));
+        AccountType accType = ValidationUtils.validateAccountType(accountType);
+        return ResponseEntity.ok(transactionService.getBalance(accType));
     }
 
     @GetMapping("/history")
     public ResponseEntity<List<Entry>> getTransactionHistory(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
+        ValidationUtils.validateFromTo(from, to);
         return ResponseEntity.ok(transactionService.getTransactionHistory(from, to));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleInvalidAccountType(InvalidAccountTypeException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
 }

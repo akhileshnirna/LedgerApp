@@ -4,6 +4,8 @@ import ch.qos.logback.core.util.StringUtil;
 import org.example.ledgerapp.dto.DoubleEntryDTO;
 import org.example.ledgerapp.dto.EntryDTO;
 import org.example.ledgerapp.dto.TransactionDTO;
+import org.example.ledgerapp.enums.AccountType;
+import org.example.ledgerapp.exception.InvalidAccountTypeException;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
@@ -51,6 +53,29 @@ public class ValidationUtils {
         }
 
         return null; // Valid
+    }
+
+    public static AccountType validateAccountType(String accountType) {
+        if (StringUtil.isNullOrEmpty(accountType)) {
+            throw new InvalidAccountTypeException("Account type should not be null or empty");
+        }
+        try {
+            return AccountType.valueOf(accountType);
+        } catch (IllegalArgumentException e) {
+            throw new InvalidAccountTypeException("Invalid account type: " + accountType);
+        }
+    }
+
+    public static void validateFromTo(LocalDateTime from, LocalDateTime to) {
+        if (from != null && to != null && from.isAfter(to)) {
+            throw new IllegalArgumentException("From date should be before to date");
+        }
+        if (from != null && from.isAfter(LocalDateTime.now())) {
+            throw new IllegalArgumentException("From date should be in the past");
+        }
+        if (to != null && to.isAfter(LocalDateTime.now())) {
+            throw new IllegalArgumentException("To date should be in the past");
+        }
     }
 
 
