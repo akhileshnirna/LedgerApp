@@ -1,7 +1,5 @@
 # Overview
-
 This repository contains code for a simple Ledger Application.
-
 
 # Implementation Details
 The application is a simple double-entry accounting system that records transactions and maintains account balances. The application follows the double-entry accounting system, which means that every transaction must have at least one debit and one credit entry.
@@ -47,6 +45,7 @@ The application is designed using the following components:
 # Requirements
 - Java 17
 - Maven > 3.8
+- Spring Boot
 
 # How to run the application
 Java 17 is required to run the application.
