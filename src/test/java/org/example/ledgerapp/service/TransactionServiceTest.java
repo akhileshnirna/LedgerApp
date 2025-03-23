@@ -1,8 +1,8 @@
 package org.example.ledgerapp.service;
 
-import org.example.ledgerapp.domain.dto.DoubleEntryDTO;
-import org.example.ledgerapp.domain.dto.EntryDTO;
-import org.example.ledgerapp.domain.dto.TransactionDTO;
+import org.example.ledgerapp.dto.DoubleEntryDTO;
+import org.example.ledgerapp.dto.EntryDTO;
+import org.example.ledgerapp.dto.TransactionDTO;
 import org.example.ledgerapp.domain.enums.AccountType;
 import org.example.ledgerapp.domain.enums.TransactionType;
 import org.example.ledgerapp.repository.LedgerRepository;

@@ -1,4 +1,4 @@
-package org.example.ledgerapp.domain.dto;
+package org.example.ledgerapp.dto;
 
 public class DoubleEntryDTO {
     private EntryDTO entry1;

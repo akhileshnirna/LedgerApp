@@ -1,4 +1,4 @@
-package org.example.ledgerapp.domain.dto;
+package org.example.ledgerapp.dto;
 
 import org.example.ledgerapp.domain.enums.AccountType;
 import org.example.ledgerapp.domain.enums.TransactionType;

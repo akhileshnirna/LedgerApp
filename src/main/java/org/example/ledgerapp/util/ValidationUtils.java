@@ -1,9 +1,9 @@
 package org.example.ledgerapp.util;
 
 import ch.qos.logback.core.util.StringUtil;
-import org.example.ledgerapp.domain.dto.DoubleEntryDTO;
-import org.example.ledgerapp.domain.dto.EntryDTO;
-import org.example.ledgerapp.domain.dto.TransactionDTO;
+import org.example.ledgerapp.dto.DoubleEntryDTO;
+import org.example.ledgerapp.dto.EntryDTO;
+import org.example.ledgerapp.dto.TransactionDTO;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;

@@ -2,7 +2,7 @@ package org.example.ledgerapp.controller;
 
 import ch.qos.logback.core.util.StringUtil;
 import org.example.ledgerapp.domain.Entry;
-import org.example.ledgerapp.domain.dto.TransactionDTO;
+import org.example.ledgerapp.dto.TransactionDTO;
 import org.example.ledgerapp.domain.enums.AccountType;
 import org.example.ledgerapp.service.TransactionService;
 import org.example.ledgerapp.util.ValidationUtils;

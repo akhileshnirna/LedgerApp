@@ -42,6 +42,7 @@ The application is designed using the following components:
 - **Repository**: The repository layer is responsible for handling the database operations.
   - In this case in-memory data structures are used to store the transactions and account balances.
 - **Model**: The model layer contains the entities used in the application.
+  
 
 # Requirements
 - Java 17
