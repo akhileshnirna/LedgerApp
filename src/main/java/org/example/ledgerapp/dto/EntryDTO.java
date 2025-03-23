@@ -1,7 +1,7 @@
 package org.example.ledgerapp.dto;
 
-import org.example.ledgerapp.domain.enums.AccountType;
-import org.example.ledgerapp.domain.enums.TransactionType;
+import org.example.ledgerapp.enums.AccountType;
+import org.example.ledgerapp.enums.TransactionType;
 
 import java.math.BigDecimal;
 

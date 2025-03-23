@@ -1,4 +1,4 @@
-package org.example.ledgerapp.domain.enums;
+package org.example.ledgerapp.enums;
 
 
 public enum AccountType {

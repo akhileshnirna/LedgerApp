@@ -4,7 +4,7 @@ import org.example.ledgerapp.dto.DoubleEntryDTO;
 import org.example.ledgerapp.domain.Entry;
 import org.example.ledgerapp.dto.EntryDTO;
 import org.example.ledgerapp.dto.TransactionDTO;
-import org.example.ledgerapp.domain.enums.AccountType;
+import org.example.ledgerapp.enums.AccountType;
 import org.example.ledgerapp.repository.LedgerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

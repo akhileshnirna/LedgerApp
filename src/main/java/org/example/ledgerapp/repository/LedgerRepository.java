@@ -1,7 +1,7 @@
 package org.example.ledgerapp.repository;
 
 import org.example.ledgerapp.domain.Entry;
-import org.example.ledgerapp.domain.enums.AccountType;
+import org.example.ledgerapp.enums.AccountType;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;

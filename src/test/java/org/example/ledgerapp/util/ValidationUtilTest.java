@@ -3,8 +3,8 @@ package org.example.ledgerapp.util;
 import org.example.ledgerapp.dto.DoubleEntryDTO;
 import org.example.ledgerapp.dto.EntryDTO;
 import org.example.ledgerapp.dto.TransactionDTO;
-import org.example.ledgerapp.domain.enums.AccountType;
-import org.example.ledgerapp.domain.enums.TransactionType;
+import org.example.ledgerapp.enums.AccountType;
+import org.example.ledgerapp.enums.TransactionType;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
