@@ -5,6 +5,7 @@ import org.example.ledgerapp.dto.EntryDTO;
 import org.example.ledgerapp.dto.TransactionDTO;
 import org.example.ledgerapp.enums.AccountType;
 import org.example.ledgerapp.enums.TransactionType;
+import org.example.ledgerapp.exception.InvalidAccountTypeException;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
@@ -113,6 +114,43 @@ public class ValidationUtilTest {
 
         transaction.setEntries(List.of(doubleEntryDTO));
         Assert.isTrue(Objects.equals(ValidationUtils.validateTransaction(transaction), "An entry has debit and credit amounts are missing or unequal"), "Amounts should not be null");
+    }
+
+    @Test
+    void validateAccountType_validAccountType() {
+        Assert.isTrue(ValidationUtils.validateAccountType("ASSET").equals(AccountType.ASSET), "Account type should be valid");
+    }
+
+    @Test
+    void validateAccountType_nullAccountType() {
+        try {
+            ValidationUtils.validateAccountType(null);
+        } catch (InvalidAccountTypeException e) {
+            Assert.isTrue(e.getMessage().equals("Account type should not be null or empty"), "Account type should not be null");
+        }
+    }
+
+    @Test
+    void validateAccountType_invalidAccountType() {
+        try {
+            ValidationUtils.validateAccountType("INVALID");
+        } catch (InvalidAccountTypeException e) {
+            Assert.isTrue(e.getMessage().equals("Invalid account type: INVALID"), "Account type should be valid");
+        }
+    }
+
+    @Test
+    void validateFromTo_validFromTo() {
+        ValidationUtils.validateFromTo(LocalDateTime.now().minusDays(1), LocalDateTime.now());
+    }
+
+    @Test
+    void validateFromTo_invalidFromTo() {
+        try {
+            ValidationUtils.validateFromTo(LocalDateTime.now(), LocalDateTime.now().minusDays(1));
+        } catch (IllegalArgumentException e) {
+            Assert.isTrue(e.getMessage().equals("From date should be before to date"), "From date should be before to date");
+        }
     }
 
     private EntryDTO makeEntry(BigDecimal amount, String dateTime, AccountType accountType, TransactionType transactionType) {
