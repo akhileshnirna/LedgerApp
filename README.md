@@ -28,8 +28,9 @@ The application is a restful service that allows the following operations:
 # Assumptions
 - The application assumes that an external service would make calls to this service to record transactions.
 - Only single currency supported
+- The application allows negative balances for accounts. (i.e. overdrafts)
 - Accounts are only at the category level (i.e. no chart of accounts hierarchy)
-- The application does not handle the accounting principles strictly.
+- The application may not handle the accounting principles strictly.
 - The application assumes that the transaction is atomic and does not handle partial transactions.
 
 # Design
@@ -159,6 +160,7 @@ The application exposes the following endpoints:
       - If the from date is after the to date
       - If from date is after the current date
       - If to date is after the current date
+      - If the date format is incorrect
 
 # DRY RUN
 
