@@ -22,6 +22,15 @@ public class LedgerRepository {
         this.accountEntries.computeIfAbsent(entry.getAccountType(), k -> new ArrayList<>()).add(entry);
     }
 
+    public void removeEntry(Entry entry) {
+        this.entries.remove(entry);
+        this.accountEntries.get(entry.getAccountType()).remove(entry);
+    }
+
+    public List<Entry> getEntriesByAccountType(AccountType accountType) {
+        return this.accountEntries.getOrDefault(accountType, new ArrayList<>());
+    }
+
     public void updateBalance(AccountType accountType, BigDecimal amount) {
         accountBalance.put(accountType, amount);
     }

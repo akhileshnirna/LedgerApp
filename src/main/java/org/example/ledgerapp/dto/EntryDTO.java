@@ -11,16 +11,26 @@ public class EntryDTO {
     private BigDecimal amount;
     private AccountType accountType;
     private TransactionType transactionType;
+    private AccountType referenceAccountType;
 
     public EntryDTO() {
     }
 
-    public EntryDTO(String timestamp, String description, BigDecimal amount, AccountType accountType, TransactionType transactionType) {
+    public EntryDTO(String timestamp, String description, BigDecimal amount, AccountType accountType, TransactionType transactionType, AccountType referenceAccountType) {
         this.timestamp = timestamp;
         this.description = description;
         this.amount = amount;
         this.accountType = accountType;
         this.transactionType = transactionType;
+        this.referenceAccountType = referenceAccountType;
+    }
+
+    public AccountType getReferenceAccountType() {
+        return referenceAccountType;
+    }
+
+    public void setReferenceAccountType(AccountType referenceAccountType) {
+        this.referenceAccountType = referenceAccountType;
     }
 
     public String getTimestamp() {

@@ -12,18 +12,27 @@ public class Entry {
     private AccountType accountType;
     private TransactionType transactionType;
     private LocalDateTime timestamp;
+    private AccountType referenceAccountType;
 
     public Entry() {
     }
 
-    public Entry(String description, BigDecimal amount, AccountType accountType, TransactionType transactionType, LocalDateTime timestamp) {
+    public Entry(String description, BigDecimal amount, AccountType accountType, TransactionType transactionType, LocalDateTime timestamp, AccountType referenceAccountType) {
         this.description = description;
         this.amount = amount;
         this.accountType = accountType;
         this.transactionType = transactionType;
         this.timestamp = timestamp;
+        this.referenceAccountType = referenceAccountType;
     }
 
+    public AccountType getReferenceAccountType() {
+        return referenceAccountType;
+    }
+
+    public void setReferenceAccountType(AccountType referenceAccountType) {
+        this.referenceAccountType = referenceAccountType;
+    }
 
     public String getDescription() {
         return description;

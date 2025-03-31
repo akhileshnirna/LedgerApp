@@ -20,6 +20,22 @@ public class TransactionService {
     @Autowired
     private LedgerRepository ledgerRepository;
 
+    public void rollback(AccountType accountType) {
+        final List<Entry> accountEntries = ledgerRepository.getEntriesByAccountType(accountType);
+        Entry latestEntry = accountEntries.get(accountEntries.size() - 1);
+        List<Entry> latestCorrespondingAccountEntries = ledgerRepository.getEntriesByAccountType(latestEntry.getReferenceAccountType());
+        Entry latestCorrespondingEntry = latestCorrespondingAccountEntries.get(latestCorrespondingAccountEntries.size() - 1);
+        if (AccountType.isIncrease(latestEntry.getAccountType(), latestEntry.getTransactionType())) {
+            ledgerRepository.updateBalance(latestEntry.getAccountType(), ledgerRepository.getBalance(latestEntry.getAccountType()).subtract(latestEntry.getAmount()));
+            ledgerRepository.updateBalance(latestEntry.getReferenceAccountType(), ledgerRepository.getBalance(latestEntry.getReferenceAccountType()).subtract(latestCorrespondingEntry.getAmount()));
+        } else {
+            ledgerRepository.updateBalance(latestEntry.getAccountType(), ledgerRepository.getBalance(latestEntry.getAccountType()).add(latestEntry.getAmount()));
+            ledgerRepository.updateBalance(latestEntry.getReferenceAccountType(), ledgerRepository.getBalance(latestEntry.getReferenceAccountType()).add(latestCorrespondingEntry.getAmount()));
+        }
+        ledgerRepository.removeEntry(latestEntry);
+        ledgerRepository.removeEntry(latestCorrespondingEntry);
+    }
+
     public void recordTransaction(TransactionDTO transaction) {
         for (DoubleEntryDTO entry : transaction.getEntries()) {
             this.handleEntry(entry.getEntry1());
@@ -61,7 +77,8 @@ public class TransactionService {
                 entryDTO.getAmount(),
                 entryDTO.getAccountType(),
                 entryDTO.getTransactionType(),
-                LocalDateTime.parse(entryDTO.getTimestamp()));
+                LocalDateTime.parse(entryDTO.getTimestamp()),
+                entryDTO.getReferenceAccountType());
 
     }
 

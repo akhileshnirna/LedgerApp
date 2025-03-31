@@ -55,6 +55,13 @@ public class LedgerController {
         return ResponseEntity.ok(transactionService.getTransactionHistory(from, to));
     }
 
+    @PostMapping("/rollback/{accountType}")
+    public ResponseEntity<String> rollback(@PathVariable String accountType) {
+        AccountType accType = ValidationUtils.validateAccountType(accountType);
+        transactionService.rollback(accType);
+        return ResponseEntity.ok("Rollback successful");
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleInvalidAccountType(InvalidAccountTypeException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
